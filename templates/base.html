@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bibliothekssystem</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2rem; }
+        nav a { margin-right: 1rem; }
+        .msg-success { color: #0a7a0a; }
+        .msg-error { color: #b40000; }
+        table { border-collapse: collapse; width: 100%; margin-top: 1rem; }
+        th, td { border: 1px solid #ddd; padding: 0.5rem; text-align: left; }
+    </style>
+</head>
+<body>
+    <nav>
+        {% if user.is_authenticated %}
+            <a href="{% url 'book_list' %}">Buecher</a>
+            <a href="{% url 'my_bookings' %}">Meine Buchungen</a>
+            <form method="post" action="{% url 'logout' %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+        {% endif %}
+    </nav>
+
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li class="msg-{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+</body>
+</html>

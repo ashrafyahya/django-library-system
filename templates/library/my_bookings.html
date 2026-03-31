@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Meine Buchungen</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Buch</th>
+            <th>Status</th>
+            <th>Gebucht am</th>
+            <th>Aktion</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for booking in bookings %}
+        <tr>
+            <td>{{ booking.book.title }}</td>
+            <td>{{ booking.get_status_display }}</td>
+            <td>{{ booking.booked_at }}</td>
+            <td>
+                {% if booking.status == 'booked' %}
+                    <form method="post" action="{% url 'cancel_booking' booking.id %}">
+                        {% csrf_token %}
+                        <button type="submit">Stornieren</button>
+                    </form>
+                {% else %}
+                    -
+                {% endif %}
+            </td>
+        </tr>
+    {% empty %}
+        <tr>
+            <td colspan="4">Du hast noch keine Buchungen.</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
