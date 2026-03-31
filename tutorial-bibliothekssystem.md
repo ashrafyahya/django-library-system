@@ -36,7 +36,7 @@ Erwartung: `Python 3.12.x`
 ## 3) Projekt anlegen
 In den Zielordner wechseln:
 ```powershell
-cd C:\Users\dell\Programming\django-project
+cd C:\Users\dell\Programming\bibliotheksystem
 ```
 
 Django-Projekt, App und Docs-Ordner erzeugen:
@@ -48,7 +48,7 @@ mkdir docs
 
 ### Projektstruktur direkt nach dem Anlegen (mit Kurzkommentaren)
 ```txt
-django-project/
+bibliotheksystem/
 |-- manage.py                           # Django Kommando-Einstieg (runserver, migrate, test)
 |-- config/                             # Projektweite Konfiguration
 |   |-- settings.py                     # Apps, Datenbank, Templates, Login-Redirects
