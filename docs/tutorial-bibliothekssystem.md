@@ -46,6 +46,35 @@ python manage.py startapp library
 mkdir docs
 ```
 
+### Projektstruktur direkt nach dem Anlegen (mit Kurzkommentaren)
+```txt
+djano-project/
+|-- manage.py                           # Django Kommando-Einstieg (runserver, migrate, test)
+|-- config/                             # Projektweite Konfiguration
+|   |-- settings.py                     # Apps, Datenbank, Templates, Login-Redirects
+|   |-- urls.py                         # Zentrale URL-Verteilung
+|   |-- asgi.py                         # ASGI-Startpunkt (Deployment/Async)
+|   `-- wsgi.py                         # WSGI-Startpunkt (klassisches Deployment)
+|-- library/                            # Unsere Fach-App Bibliothekssystem
+|   |-- models.py                       # Datenmodelle: Category, Book, Booking
+|   |-- views.py                        # Seitenlogik: Liste, Buchen, Stornieren
+|   |-- admin.py                        # Admin-Ansichten und Admin-Aktionen
+|   |-- urls.py                         # App-URLs fuer library
+|   |-- tests.py                        # Einfache Logiktests
+|   `-- migrations/                     # Automatisch erzeugte DB-Migrationen
+|-- templates/                          # HTML Templates fuer UI
+|   |-- base.html                       # Grundlayout/Navigation/Messages
+|   |-- registration/login.html         # Login-Seite
+|   `-- library/                        # Fachseiten der library-App
+|       |-- book_list.html              # Buchkatalog + Buchen-Button
+|       `-- my_bookings.html            # Eigene Buchungen + Storno-Button
+|-- requirements.txt                    # Fixe Python-Abhaengigkeiten
+|-- .gitignore                          # Nicht zu versionierende Dateien
+`-- docs/
+    |-- plan.md                         # Anforderungen, Regeln, Leitplanken
+    `-- tutorial-bibliothekssystem.md   # Schritt-fuer-Schritt Tutorial
+```
+
 ## 4) Abhaengigkeiten festlegen
 Datei `requirements.txt` anlegen:
 ```txt
