@@ -1,1 +1,1 @@
-# djano-project
+# djagno-project
