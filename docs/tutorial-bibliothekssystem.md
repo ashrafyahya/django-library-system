@@ -1,33 +1,33 @@
-# Django Tutorial: Bibliothekssystem fuer Studierende
+# Django Tutorial: Bibliothekssystem für Studierende
 
 ## 1) Was wir bauen
 Wir bauen ein kleines Webprojekt mit Django:
-- Studierende sehen Buecher und verfuegbare Anzahl.
-- Studierende buchen Buecher.
+- Studierende sehen Bücher und verfügbare Anzahl.
+- Studierende buchen Bücher.
 - Studierende stornieren Buchungen.
 - Studierende sehen ihre Buchungen (Statusliste).
-- Admin verwaltet Buecher und Buchungsstatus.
+- Admin verwaltet Bücher und Buchungsstatus.
 
-### Mini-Beispiel fuer die Logik
+### Mini-Beispiel für die Logik
 Ein Buch hat `available_copies = 2`:
 1. Student bucht das Buch -> `available_copies = 1`
 2. Student storniert die Buchung -> `available_copies = 2`
-3. Admin setzt spaeter eine Buchung auf `borrowed` und danach auf `returned` -> bei `returned` wird der Bestand wieder erhoeht
+3. Admin setzt später eine Buchung auf `borrowed` und danach auf `returned` -> bei `returned` wird der Bestand wieder erhöht
 
-### Wichtige Begriffe (einfach erklaert)
+### Wichtige Begriffe (einfach erklärt)
 - **Model**: Datenstruktur in Python (z. B. Buch, Buchung).
 - **Migration**: Datenbank-Update auf Basis der Models.
-- **View**: Python-Logik fuer eine Seite/Aktion.
-- **Template**: HTML-Datei fuer die Darstellung.
+- **View**: Python-Logik für eine Seite/Aktion.
+- **Template**: HTML-Datei für die Darstellung.
 - **Admin**: Django-Backend zur Datenverwaltung.
 
 ## 2) Voraussetzungen
 - Windows 10/11
 - PowerShell
 - Python **3.12.x** installiert
-- Internet fuer Paketinstallation
+- Internet für Paketinstallation
 
-Pruefen:
+Prüfen:
 ```powershell
 python --version
 ```
@@ -36,7 +36,7 @@ Erwartung: `Python 3.12.x`
 ## 3) Projekt anlegen
 In den Zielordner wechseln:
 ```powershell
-cd C:\Users\dell\Programming\djano-project
+cd C:\Users\dell\Programming\django-project
 ```
 
 Django-Projekt, App und Docs-Ordner erzeugen:
@@ -48,7 +48,7 @@ mkdir docs
 
 ### Projektstruktur direkt nach dem Anlegen (mit Kurzkommentaren)
 ```txt
-djano-project/
+django-project/
 |-- manage.py                           # Django Kommando-Einstieg (runserver, migrate, test)
 |-- config/                             # Projektweite Konfiguration
 |   |-- settings.py                     # Apps, Datenbank, Templates, Login-Redirects
@@ -59,29 +59,29 @@ djano-project/
 |   |-- models.py                       # Datenmodelle: Category, Book, Booking
 |   |-- views.py                        # Seitenlogik: Liste, Buchen, Stornieren
 |   |-- admin.py                        # Admin-Ansichten und Admin-Aktionen
-|   |-- urls.py                         # App-URLs fuer library
+|   |-- urls.py                         # App-URLs für library
 |   |-- tests.py                        # Einfache Logiktests
 |   `-- migrations/                     # Automatisch erzeugte DB-Migrationen
-|-- templates/                          # HTML Templates fuer UI
+|-- templates/                          # HTML Templates für UI
 |   |-- base.html                       # Grundlayout/Navigation/Messages
 |   |-- registration/login.html         # Login-Seite
 |   `-- library/                        # Fachseiten der library-App
 |       |-- book_list.html              # Buchkatalog + Buchen-Button
 |       `-- my_bookings.html            # Eigene Buchungen + Storno-Button
-|-- requirements.txt                    # Fixe Python-Abhaengigkeiten
+|-- requirements.txt                    # Fixe Python-Abhängigkeiten
 |-- .gitignore                          # Nicht zu versionierende Dateien
 `-- docs/
     |-- plan.md                         # Anforderungen, Regeln, Leitplanken
-    `-- tutorial-bibliothekssystem.md   # Schritt-fuer-Schritt Tutorial
+    `-- tutorial-bibliothekssystem.md   # Schritt-für-Schritt Tutorial
 ```
 
-## 4) Abhaengigkeiten festlegen
+## 4) Abhängigkeiten festlegen
 Datei `requirements.txt` anlegen:
 ```txt
 Django==5.1.3
 ```
 
-## 5) `.gitignore` fuer Python-Projekt
+## 5) `.gitignore` für Python-Projekt
 Datei `.gitignore` auf diesen Inhalt setzen:
 ```txt
 .vscode/
@@ -103,7 +103,7 @@ db.sqlite3
 
 ## 6) Django Settings konfigurieren
 Datei `config/settings.py` anpassen:
-- `library` zu `INSTALLED_APPS` hinzufuegen
+- `library` zu `INSTALLED_APPS` hinzufügen
 - Template-Ordner aktivieren
 - Login/Logout Redirects setzen
 
@@ -294,8 +294,8 @@ class Booking(models.Model):
 | Student bucht | - | `booked` | `-1` |
 | Student storniert | `booked` | `cancelled` | `+1` |
 | Admin storniert | `booked` | `cancelled` | `+1` |
-| Admin setzt ausgeliehen | `booked` | `borrowed` | unveraendert |
-| Admin setzt zurueckgegeben | `borrowed` | `returned` | `+1` |
+| Admin setzt ausgeliehen | `booked` | `borrowed` | unverändert |
+| Admin setzt zurückgegeben | `borrowed` | `returned` | `+1` |
 
 ## 9) Views implementieren
 Datei `library/views.py` komplett ersetzen:
@@ -451,7 +451,7 @@ Datei `templates/base.html`:
 <body>
     <nav>
         {% if user.is_authenticated %}
-            <a href="{% url 'book_list' %}">Buecher</a>
+            <a href="{% url 'book_list' %}">Bücher</a>
             <a href="{% url 'my_bookings' %}">Meine Buchungen</a>
             <form method="post" action="{% url 'logout' %}" style="display:inline;">
                 {% csrf_token %}
@@ -494,7 +494,7 @@ Datei `templates/library/book_list.html`:
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Buecherkatalog</h1>
+<h1>Bücherkatalog</h1>
 
 <table>
     <thead>
@@ -502,7 +502,7 @@ Datei `templates/library/book_list.html`:
             <th>Titel</th>
             <th>Autor</th>
             <th>Kategorie</th>
-            <th>Verfuegbar</th>
+            <th>Verfügbar</th>
             <th>Gesamt</th>
             <th>Aktion</th>
         </tr>
@@ -522,13 +522,13 @@ Datei `templates/library/book_list.html`:
                         <button type="submit">Buchen</button>
                     </form>
                 {% else %}
-                    Nicht verfuegbar
+                    Nicht verfügbar
                 {% endif %}
             </td>
         </tr>
     {% empty %}
         <tr>
-            <td colspan="6">Keine Buecher vorhanden.</td>
+            <td colspan="6">Keine Bücher vorhanden.</td>
         </tr>
     {% endfor %}
     </tbody>
@@ -579,15 +579,15 @@ Datei `templates/library/my_bookings.html`:
 {% endblock %}
 ```
 
-## 12) Migrationen ausfuehren
+## 12) Migrationen ausführen
 ```powershell
 python manage.py makemigrations library
 python manage.py migrate
 ```
 
-Erwartung: Migrationen fuer `library` und Standard-Apps werden erfolgreich angewendet.
+Erwartung: Migrationen für `library` und Standard-Apps werden erfolgreich angewendet.
 
-## 13) Testdatei fuer Logiktests
+## 13) Testdatei für Logiktests
 Datei `library/tests.py` komplett ersetzen:
 ```python
 from django.contrib.auth import get_user_model
@@ -661,28 +661,28 @@ Admin-Testdaten anlegen:
 2. Buch erstellen (`total_copies=5`, `available_copies=5`)
 3. Student-User in Admin anlegen
 4. Als Student einloggen und Buch buchen
-5. Pruefen: `available_copies` sinkt
+5. Prüfen: `available_copies` sinkt
 6. Buchung stornieren
-7. Pruefen: `available_copies` steigt wieder
+7. Prüfen: `available_copies` steigt wieder
 
 ## 15) Smoke-Check (Muss funktionieren)
 - Login funktioniert
-- Buchliste zeigt Verfuegbarkeit
+- Buchliste zeigt Verfügbarkeit
 - Buchen reduziert Bestand
-- Storno erhoeht Bestand
+- Storno erhöht Bestand
 - Admin kann Status per Aktion setzen (`cancelled`, `borrowed`, `returned`)
 
-## 16) Typische Fehler und Loesungen
+## 16) Typische Fehler und Lösungen
 - **`No module named django`**  
   -> `pip install -r requirements.txt`
 - **Migration-Fehler**  
-  -> pruefen, ob `library` in `INSTALLED_APPS` steht
+  -> prüfen, ob `library` in `INSTALLED_APPS` steht
 - **Template not found**  
-  -> `TEMPLATES['DIRS'] = [BASE_DIR / 'templates']` pruefen
+  -> `TEMPLATES['DIRS'] = [BASE_DIR / 'templates']` prüfen
 - **Login redirectet falsch**  
-  -> `LOGIN_URL`, `LOGIN_REDIRECT_URL`, `LOGOUT_REDIRECT_URL` pruefen
+  -> `LOGIN_URL`, `LOGIN_REDIRECT_URL`, `LOGOUT_REDIRECT_URL` prüfen
 
-## 17) Warum dieses Projekt fuer Anfaenger gut ist
+## 17) Warum dieses Projekt für Anfänger gut ist
 - Klein genug, um alles zu verstehen
 - Trotzdem echte Praxis: Auth, CRUD, Business-Regeln, Admin
 - Klare Trennung: Models (Daten), Views (Logik), Templates (UI)
