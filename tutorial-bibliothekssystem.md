@@ -1,4 +1,14 @@
-# Django Tutorial: Bibliothekssystem für Studierende
+# Django Bibliotheksystem
+
+Dieses Notebook richtet sich an Einsteiger*innen und bietet einen praxisnahen Leitfaden für die Django-Entwicklung. Schritt für Schritt wird ein Projekt aufgebaut, mit Copilot-Hinweisen, Übungsaufgaben und externen Ressourcen.
+
+## 1) Ziel dieses Notebooks
+
+- Django-Projektstruktur verstehen
+- Models, Views, Templates, URLs anlegen
+- Entwicklungsworkflow mit `python manage.py` kennen
+- Copilot sinnvoll einsetzen (Prompt-Beispiele)
+- Kleine Aufgaben und eigene Ideen umsetzen
 
 ## 1) Was wir bauen
 Wir bauen ein kleines Webprojekt mit Django:
@@ -682,7 +692,9 @@ Admin-Testdaten anlegen:
 - **Login redirectet falsch**  
   -> `LOGIN_URL`, `LOGIN_REDIRECT_URL`, `LOGOUT_REDIRECT_URL` prüfen
 
-## 17) Warum dieses Projekt für Anfänger gut ist
-- Klein genug, um alles zu verstehen
-- Trotzdem echte Praxis: Auth, CRUD, Business-Regeln, Admin
-- Klare Trennung: Models (Daten), Views (Logik), Templates (UI)
+## Aufgaben & Herausforderungen
+1. Modell `Author` hinzufügen und `Book` verknüpfen (ForeignKey)
+2. Suchfeld für Buchtitel implementieren
+3. Verfügbarkeit (`available`) über Formular verändern
+4. Benutzerregistrierung / Login (Authentication)
+5. Tests schreiben: `BookModelTest`, `BookListViewTest`
